@@ -1,0 +1,14 @@
+<div style="text-align:center">
+  <h1>
+    Welcome to chat
+  </h1>
+  <div class="chat-container">
+    <div class="chat">
+      <div class="message"></div>
+    </div>
+  </div>
+</div>
+
+<button (click)="messageService.sendMessage(input.value)"></button>
+<input  id="input" type="text" #input/>
+
