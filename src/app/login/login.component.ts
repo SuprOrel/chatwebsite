@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MessageService} from "../util/messageService";
-import {Router} from "@angular/router";
+import {MessageService} from '../util/messageService';
+import {Router} from '@angular/router';
 import $ from 'jquery';
 
 @Component({
@@ -12,13 +12,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public messageService = MessageService;
   constructor(private router: Router) {
-    MessageService.stompClient.subscribe("/login", (message) => {
-      console.log(message.body);
-      $('#input').value = message.body;
-      if (message.body != "Occupied"){
-        this.router.navigate(['/chat']);
-      }
-    });
+    // MessageService.stompClient.subscribe('/login', (message) => {
+    //   console.log(message.body);
+    //   $('#input').value = message.body;
+    //   if (message.body !== 'Occupied'){
+    //     this.router.navigate(['/chat']);
+    //   }
+    // });
+    MessageService.loggedIn$.subscribe(x => this.router.navigate(['/chat']));
   }
 
   ngOnInit(): void {

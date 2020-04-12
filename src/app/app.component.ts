@@ -8,11 +8,11 @@ import {Router} from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  public title = "ChatExample";
+  public title = 'ChatExample';
 
-  constructor(private router : Router){
+  constructor(private router: Router){
     MessageService.connected$.subscribe(x => this.router.navigate(['/login']));
-    MessageService.initializeWebSocketConnection();
+    MessageService.connect();
   }
 
   ngOnInit() {
