@@ -51,6 +51,8 @@ export class MessageService {
     });
   }
 
+
+
   static disconnect() {
     if (MessageService.stompClient != null) {
       MessageService.stompClient.close();
@@ -68,7 +70,7 @@ export class MessageService {
   // }
 
   static sendMessage(message){
-    this.stompClient.send('/app/send/message' , {}, this.Username + ':' + message);
+    this.stompClient.send('/app/message' , {}, this.Username + ':' + message);
     $('#input').val('');
   }
 

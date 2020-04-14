@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MessageService} from "../util/messageService";
+import {MessageService} from '../util/messageService';
 import $ from 'jquery';
-import {AppComponent} from "../app.component";
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-chat',
@@ -11,8 +11,8 @@ import {AppComponent} from "../app.component";
 export class ChatComponent implements OnInit {
   public messageService = MessageService;
   constructor(){
-    MessageService.stompClient.subscribe("/chat", (message) => {
-      $(".chat").append("<div class='message'>"+message.body+"</div>");
+    MessageService.stompClient.subscribe('/global', (message) => {
+      $('.chat').append('<div class=\'message\'>' + message.body + '</div>');
       console.log(message.body);
     });
   }
