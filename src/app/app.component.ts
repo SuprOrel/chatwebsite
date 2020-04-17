@@ -11,11 +11,10 @@ export class AppComponent implements OnInit{
   public title = 'ChatExample';
 
   constructor(private router: Router){
-    MessageService.connected$.subscribe(x => this.router.navigate(['/login']));
-    MessageService.connect();
   }
 
   ngOnInit() {
-
+    MessageService.connected$.subscribe(x => this.router.navigate(['/chat']));
+    MessageService.connect();
   }
 }

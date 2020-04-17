@@ -1,14 +1,17 @@
+<app-userlist [usernames]="messageService.usernames" class="userlist"></app-userlist>
+
 <div style="text-align:center">
   <h1>
     Welcome to chat
   </h1>
   <div class="chat-container">
     <div class="chat">
-      <div class="message"></div>
+      <div class="message">
+      </div>
     </div>
   </div>
 </div>
 
-<button (click)="messageService.sendMessage(input.value)"></button>
+<button (click)="messageService.sendMessage(input.value)">Send</button>
 <input  id="input" type="text" #input/>
 

@@ -7,6 +7,7 @@ import $ from 'jquery';
 
 export class MessageService {
 
+  public static usernames: string[] = [];
   private static connectedSource = new Subject();
   public static connected$ = MessageService.connectedSource.asObservable();
   public static connected = false;
@@ -22,15 +23,35 @@ export class MessageService {
 
   static connect() {
     // let socket = new WebSocket(this.serverUrl);
-    function loginAttempted(message) {
-      if (message.body !== 'Occupied'){
-        MessageService.Username = message.body;
-        MessageService.stompClient.unsubscribe('/user/queue/reply', loginAttempted);
-        MessageService.loggedIn = true;
-        MessageService.loggedInSource.next();
+    function messageRecieved(message) {
+      const msg = message.body.substring(10);
+      if (msg.startsWith('disconnected')){
+        const index = MessageService.usernames.indexOf(msg.substring(13));
+        console.log(index);
+        MessageService.usernames.splice(index, 1);
       }
-      else {
-        alert('Occupied');
+      else if (msg.startsWith('connected')) {
+        MessageService.usernames.push(msg.substring(10));
+      }
+      console.log(msg);
+    }
+    function loginAttempted(message) {
+      if (message.body !== 'disconnected'){
+        if (message.body !== 'Occupied'){
+          const usernames = message.body.split(',');
+          usernames.pop();
+          MessageService.usernames = usernames;
+        // for (const username of usernames) {
+        //   console.log(username);
+        // }
+        //   MessageService.stompClient.unsubscribe('/user/queue/reply', loginAttempted);
+          MessageService.loggedIn = true;
+          MessageService.loggedInSource.next();
+        }
+        else {
+          alert('Occupied');
+        }
+
       }
     }
 
@@ -43,6 +64,7 @@ export class MessageService {
       });
 
       this.stompClient.subscribe('/user/queue/reply', loginAttempted );
+      this.stompClient.subscribe('/global', messageRecieved);
 
       this.connectedSource.next();
       this.connected = true;
@@ -70,11 +92,33 @@ export class MessageService {
   // }
 
   static sendMessage(message){
-    this.stompClient.send('/app/message' , {}, this.Username + ':' + message);
+    if (this.loggedIn === false){
+      this.login(message);
+    }
+    else {
+      if (message === 'disconnect') {
+        this.stompClient.send('/app/login' , {}, 'disconnect ' + this.Username);
+        this.loggedIn = false;
+      }
+      else {
+        this.stompClient.send('/app/message' , {}, this.Username + ':' + message);
+      }
+    }
     $('#input').val('');
   }
 
+  static messageGetDate(message: string) {
+    return message.substring(0, 8);
+  }
+  static messageGetName(message: string) {
+    return message.substring(10, message.indexOf(':', 10));
+  }
+  static messageGetValue(message: string) {
+    return message.substring(message.indexOf(':', 10));
+  }
+
   static login(username) {
+    this.Username = username;
     this.stompClient.send('/app/login' , {}, username);
   }
 
