@@ -19,19 +19,19 @@ export class ChatComponent implements OnInit {
     // const comp = new UserComponent();
     // comp.username = 'oof';
     // this.usernames.push(comp);
-    MessageService.stompClient.subscribe('/global', (message) => {
-      console.log(message.body);
-      // if (message.body.endsWith('disconnected ' + MessageService.Username)) {
-      //   // MessageService.disconnect();
-      //   this.router.navigate(['/login']);
-      // }
-      // else {
-      //   $('.chat')
-      //       .append('<div class=\'message\'>' + message.body + '</div>');
-      // }
-      $('.chat')
-        .append('<div class=\'message\'>' + message.body + '</div>');
-    });
+    // MessageService.stompClient.subscribe('/global', (message) => {
+    //   console.log(message.body);
+    //   // if (message.body.endsWith('disconnected ' + MessageService.Username)) {
+    //   //   // MessageService.disconnect();
+    //   //   this.router.navigate(['/login']);
+    //   // }
+    //   // else {
+    //   //   $('.chat')
+    //   //       .append('<div class=\'message\'>' + message.body + '</div>');
+    //   // }
+    //   $('.chat')
+    //     .append('<div class=\'message\'>' + message.body + '</div>');
+    // });
   }
 
   // addMessage(value: string): void {
@@ -44,5 +44,10 @@ export class ChatComponent implements OnInit {
   // }
 
   ngOnInit(): void {
+  }
+
+  sendMessage(value): void {
+    MessageService.sendMessage(value);
+    $('#input').val('');
   }
 }

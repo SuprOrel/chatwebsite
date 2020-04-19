@@ -9,9 +9,11 @@ import { LoadingComponent } from './loading/loading.component';
 import {FormsModule} from '@angular/forms';
 import { UserlistComponent } from './chat/userlist/userlist.component';
 import { UserComponent } from './chat/user/user.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   { path: 'chat', component: ChatComponent },
+  { path: 'login', component: LoginComponent },
   { path: '', component: LoadingComponent}
 ];
 @NgModule({
@@ -20,7 +22,8 @@ const appRoutes: Routes = [
     ChatComponent,
     LoadingComponent,
     UserlistComponent,
-    UserComponent
+    UserComponent,
+    LoginComponent
   ],
     imports: [
         RouterModule.forRoot(

@@ -14,7 +14,9 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    MessageService.connected$.subscribe(x => this.router.navigate(['/chat']));
+    MessageService.connected$.subscribe(x => this.router.navigate(['/login']));
+    MessageService.loggedIn$.subscribe(x => this.router.navigate(['/chat']));
+    MessageService.loggedOut$.subscribe(x => this.router.navigate(['/login']));
     MessageService.connect();
   }
 }
