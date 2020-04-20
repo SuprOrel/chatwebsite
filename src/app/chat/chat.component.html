@@ -1,12 +1,11 @@
 <div class="ui grid">
-  <h1 class="ui centered row">
+  <h1 class="ui centered row" style="color: dimgrey">
     Welcome to chat
   </h1>
   <div class="twelve wide column">
     <div class="twelve wide row">
-      <div *ngFor="let message of messageService.messages">
-        {{message}}
-      </div>
+      <app-chat-message *ngFor="let message of messageService.messages" [chatMessage]="message">
+      </app-chat-message>
     </div>
     <div class="row">
       <button class="ui tiny button" (click)="sendMessage(input.value)">Send</button>

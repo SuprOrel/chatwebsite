@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import { UserlistComponent } from './chat/userlist/userlist.component';
 import { UserComponent } from './chat/user/user.component';
 import { LoginComponent } from './login/login.component';
+import { ChatMessageComponent } from './chat/chat-message/chat-message.component';
 
 const appRoutes: Routes = [
   { path: 'chat', component: ChatComponent },
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
     LoadingComponent,
     UserlistComponent,
     UserComponent,
-    LoginComponent
+    LoginComponent,
+    ChatMessageComponent
   ],
     imports: [
         RouterModule.forRoot(

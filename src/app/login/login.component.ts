@@ -16,7 +16,12 @@ export class LoginComponent implements OnInit {
   }
 
   loginClick(value) {
-    MessageService.login(value);
-    $('#input').val('');
+    if (value === '') {
+      alert('Login failed: Must enter username')
+    }
+    else {
+      MessageService.login(value);
+      $('#input').val('');
+    }
   }
 }

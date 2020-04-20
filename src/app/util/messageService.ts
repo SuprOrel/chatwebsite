@@ -3,11 +3,12 @@ import { Subject } from 'rxjs';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import $ from 'jquery';
+import {ChatMessage} from './chatMessage';
 
 
 export class MessageService {
 
-  public static messages: string[] = [];
+  public static messages: ChatMessage[] = [];
   public static usernames: string[] = [];
 
   private static connectedSource = new Subject();
@@ -30,16 +31,22 @@ export class MessageService {
   static connect() {
     // let socket = new WebSocket(this.serverUrl);
     function messageRecieved(message) {
-      const msg = message.body.substring(10);
-      if (msg.startsWith('logged out')){
-        const index = MessageService.usernames.indexOf(msg.substring(11));
-        console.log(index);
-        MessageService.usernames.splice(index, 1);
+      const msg = new ChatMessage(message.body);
+      console.log(msg.date);
+      console.log(msg.sender);
+      console.log(msg.message);
+
+      if (msg.sender === 'Server') {
+        if (msg.message.startsWith('logged out')){
+          const index = MessageService.usernames.indexOf(msg.message.substring(11));
+          console.log(index);
+          MessageService.usernames.splice(index, 1);
+        }
+        else if (msg.message.startsWith('logged in')) {
+          MessageService.usernames.push(msg.message.substring(10));
+        }
       }
-      else if (msg.startsWith('logged in')) {
-        MessageService.usernames.push(msg.substring(10));
-      }
-      MessageService.messages.push(message.body);
+      MessageService.messages.push(msg);
       MessageService.messageReceivedInSource.next();
     }
     function replyRecieved(message) {
