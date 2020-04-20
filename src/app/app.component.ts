@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MessageService} from "./util/messageService";
-import {Router} from "@angular/router";
+import {MessageService} from './util/messageService';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',

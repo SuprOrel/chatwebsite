@@ -104,12 +104,7 @@ export class MessageService {
   // }
 
   static sendMessage(message){
-    if (message === 'log out') {
-      this.stompClient.send('/app/login' , {}, 'log out ' + this.Username);
-    }
-    else {
-      this.stompClient.send('/app/message' , {}, this.Username + ':' + message);
-    }
+    this.stompClient.send('/app/message' , {}, this.Username + ':' + message);
   }
 
   static messageGetDate(message: string) {
@@ -122,6 +117,9 @@ export class MessageService {
     return message.substring(message.indexOf(':', 10));
   }
 
+  static logout() {
+    this.stompClient.send('/app/login' , {}, 'log out ' + this.Username);
+  }
   static login(username) {
     this.Username = username;
     this.stompClient.send('/app/login' , {}, username);

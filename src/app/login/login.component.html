@@ -1,4 +1,8 @@
-<app-userlist [usernames]="messageService.usernames" class="userlist"></app-userlist>
+<div class="ui grid" >
+  <div class="twelve wide column">
+    <button class="ui tiny button" (click)="loginClick(input.value)">Login</button>
+    <input class="ui input" id="input" type="text" (keydown.enter)="loginClick(input.value)" #input/>
+  </div>
 
-<button (click)="loginClick(input.value)">Login</button>
-<input  id="input" type="text" #input/>
+  <app-userlist class="column" [usernames]="messageService.usernames"></app-userlist>
+</div>

@@ -1,18 +1,22 @@
-<app-userlist [usernames]="messageService.usernames" class="userlist"></app-userlist>
-
-<div style="text-align:center">
-  <h1>
+<div class="ui grid">
+  <h1 class="ui centered row">
     Welcome to chat
   </h1>
-  <div class="chat-container">
-    <div class="chat">
-      <div class="message" *ngFor="let message of messageService.messages">
+  <div class="twelve wide column">
+    <div class="twelve wide row">
+      <div *ngFor="let message of messageService.messages">
         {{message}}
       </div>
     </div>
+    <div class="row">
+      <button class="ui tiny button" (click)="sendMessage(input.value)">Send</button>
+      <input class="ui long input"  id="input" type="text" (keydown.enter)="sendMessage(input.value)" #input/>
+    </div>
+  </div>
+  <div class="column">
+    <button class="ui tiny button" (click)="messageService.logout()">Logout</button>
+    <app-userlist [usernames]="messageService.usernames" ></app-userlist>
   </div>
 </div>
 
-<button (click)="sendMessage(input.value)">Send</button>
-<input  id="input" type="text" #input/>
 
