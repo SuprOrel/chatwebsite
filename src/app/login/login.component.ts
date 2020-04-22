@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginClick(value) {
+  login(value) {
     if (value === '') {
       alert('Login failed: Must enter username')
     }

@@ -1,5 +1,11 @@
 <div class="ui grid">
   <div class="column" style="color: dimgrey;">{{chatMessage.date}}</div>
   <app-user class="three wide column" [username]="chatMessage.sender"></app-user>
-  <div class="four wide column" style="color: dimgrey">{{chatMessage.message}}</div>
+  <div class="four wide column" style="color: dimgrey">
+    <span *ngFor="let word of chatMessage.message.split(' ')">
+      <span *ngIf="word.startsWith('@'); else elseBlock"><app-user [username]="word.substring(1)"></app-user></span>
+      <ng-template #elseBlock>{{word}}</ng-template>
+      {{' '}}
+     </span>
+  </div>
 </div>

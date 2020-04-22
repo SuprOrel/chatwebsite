@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import $ from 'jquery';
+import {MessageService} from '../../util/messageService';
 
 @Component({
   selector: 'app-user',
@@ -16,6 +17,10 @@ export class UserComponent implements OnInit {
   }
 
   onClicked(): void {
-    $('#input').val(this.username);
+    $('#input').val('@' + this.username);
+  }
+
+  isValidUsername(username: string): boolean {
+    return username === 'Server' || MessageService.usernames.indexOf(username) > -1;
   }
 }

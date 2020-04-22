@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ContentChild, Input, OnInit, ViewChild} from '@angular/core';
 import {ChatMessage} from '../../util/chatMessage';
+import $ from 'jquery';
 
 @Component({
   selector: 'app-chat-message',
@@ -10,6 +11,7 @@ export class ChatMessageComponent implements OnInit {
 
   @Input()
   public chatMessage: ChatMessage;
+
   constructor() { }
 
   ngOnInit(): void {

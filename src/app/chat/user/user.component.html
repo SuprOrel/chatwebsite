@@ -1,1 +1,2 @@
-<button class="ui grey tiny button" (click)="onClicked()">{{username}}</button>
+<button *ngIf="isValidUsername(username); else elseBlock" class="ui grey tiny button" (click)="onClicked()">{{username}}</button>
+<ng-template #elseBlock>@{{username}}</ng-template>
