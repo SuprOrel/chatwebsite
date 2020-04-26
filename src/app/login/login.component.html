@@ -1,7 +1,14 @@
 <div class="ui grid" >
   <div class="twelve wide column">
-    <button class="ui tiny button" (click)="login(input.value)">Login</button>
-    <input class="ui input" id="input" type="text" (keydown.enter)="login(input.value)" #input/>
+    <div class="row">
+      <input class="ui input" id="usernameInput" type="text" (keydown.enter)="login(usernameInput.value, passwordInput.value)" #usernameInput/>
+    </div>
+    <div class="row">
+      <input class="ui input" id="passwordInput" type="text" (keydown.enter)="login(usernameInput.value, passwordInput.value)" #passwordInput/>
+    </div>
+    <div class="row">
+      <button class="ui tiny button" (click)="login(usernameInput.value, passwordInput.value)">Login</button>
+    </div>
   </div>
 
   <app-userlist class="column" [usernames]="messageService.usernames"></app-userlist>

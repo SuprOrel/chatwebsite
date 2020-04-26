@@ -37,8 +37,8 @@ export class MessageService {
       console.log(msg.message);
 
       if (msg.sender === 'Server') {
-        if (msg.message.startsWith('logged out')){
-          const index = MessageService.usernames.indexOf(msg.message.substring(11));
+        if (msg.message.startsWith('deleted')){
+          const index = MessageService.usernames.indexOf(msg.message.substring(8));
           console.log(index);
           MessageService.usernames.splice(index, 1);
         }
@@ -57,7 +57,7 @@ export class MessageService {
         MessageService.loggedIn = true;
         MessageService.loggedInSource.next();
       }
-      else if (message.body === 'logged out') {
+      else if (message.body === 'deleted') {
         MessageService.loggedIn = false;
         MessageService.loggedOutSource.next();
       }
@@ -124,12 +124,12 @@ export class MessageService {
     return message.substring(message.indexOf(':', 10));
   }
 
-  static logout() {
-    this.stompClient.send('/app/login' , {}, 'log out ' + this.Username);
+  static deleteAccount() {
+    this.stompClient.send('/app/login' , {}, 'delete ' + this.Username);
   }
-  static login(username) {
+  static login(username, password) {
     this.Username = username;
-    this.stompClient.send('/app/login' , {}, username);
+    this.stompClient.send('/app/login' , {}, username + ',' + password);
   }
 
 }

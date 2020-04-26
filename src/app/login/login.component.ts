@@ -15,13 +15,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(value) {
-    if (value === '') {
-      alert('Login failed: Must enter username')
+  login(username, password) {
+    if (username === '' || password === '') {
+      alert('Login failed: Must fill fields');
     }
     else {
-      MessageService.login(value);
-      $('#input').val('');
+      MessageService.login(username, password);
+      $('#usernameInput').val('');
+      $('#passwordInput').val('');
     }
   }
 }

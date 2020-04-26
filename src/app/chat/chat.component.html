@@ -1,7 +1,7 @@
 <div class="ui grid">
-  <h1 class="ui centered row" style="color: dimgrey">
-    Welcome to chat
-  </h1>
+  <div class="row">
+    <button class="ui tiny button" (click)="messageService.deleteAccount()">Delete Account</button>
+  </div>
   <div class="twelve wide column">
     <div class="twelve wide row">
       <app-chat-message *ngFor="let message of messageService.messages" [chatMessage]="message">
@@ -13,7 +13,6 @@
     </div>
   </div>
   <div class="column">
-    <button class="ui tiny button" (click)="messageService.logout()">Logout</button>
     <app-userlist [usernames]="messageService.usernames" ></app-userlist>
   </div>
 </div>
