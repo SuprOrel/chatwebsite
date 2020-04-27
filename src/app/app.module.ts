@@ -11,10 +11,12 @@ import { UserlistComponent } from './chat/userlist/userlist.component';
 import { UserComponent } from './chat/user/user.component';
 import { LoginComponent } from './login/login.component';
 import { ChatMessageComponent } from './chat/chat-message/chat-message.component';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
   { path: 'chat', component: ChatComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '', component: LoadingComponent}
 ];
 @NgModule({
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
     UserlistComponent,
     UserComponent,
     LoginComponent,
-    ChatMessageComponent
+    ChatMessageComponent,
+    RegisterComponent
   ],
     imports: [
         RouterModule.forRoot(

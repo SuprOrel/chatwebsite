@@ -9,6 +9,9 @@
     <div class="row">
       <button class="ui tiny button" (click)="login(usernameInput.value, passwordInput.value)">Login</button>
     </div>
+    <div class="row">
+      <button class="ui tiny button" (click)="router.navigate(['/register'])">Register</button>
+    </div>
   </div>
 
   <app-userlist class="column" [usernames]="messageService.usernames"></app-userlist>

@@ -42,7 +42,7 @@ export class MessageService {
           console.log(index);
           MessageService.usernames.splice(index, 1);
         }
-        else if (msg.message.startsWith('logged in')) {
+        else if (msg.message.startsWith('registerd')) {
           MessageService.usernames.push(msg.message.substring(10));
         }
       }
@@ -50,16 +50,13 @@ export class MessageService {
       MessageService.messageReceivedInSource.next();
     }
     function replyRecieved(message) {
-      if (message.body.startsWith('Login failed')) {
+      if (message.body.startsWith('Login failed') || message.body.startsWith('Register failed')) {
         alert(message.body);
       }
-      else if (message.body === 'logged in') {
+      else if (message.body.startsWith('Logged in')) {
+        MessageService.Username = message.body.substring(11);
         MessageService.loggedIn = true;
         MessageService.loggedInSource.next();
-      }
-      else if (message.body === 'deleted') {
-        MessageService.loggedIn = false;
-        MessageService.loggedOutSource.next();
       }
       else {
         const usernames = message.body.split(',');
@@ -114,22 +111,11 @@ export class MessageService {
     this.stompClient.send('/app/message' , {}, this.Username + ':' + message);
   }
 
-  static messageGetDate(message: string) {
-    return message.substring(0, 8);
-  }
-  static messageGetName(message: string) {
-    return message.substring(10, message.indexOf(':', 10));
-  }
-  static messageGetValue(message: string) {
-    return message.substring(message.indexOf(':', 10));
+  static login(mail, password) {
+    this.stompClient.send('/app/login' , {}, mail + ',' + password);
   }
 
-  static deleteAccount() {
-    this.stompClient.send('/app/login' , {}, 'delete ' + this.Username);
+  static register(mail, password, username) {
+    this.stompClient.send('/app/register', {}, mail + ',' + password + ',' + username);
   }
-  static login(username, password) {
-    this.Username = username;
-    this.stompClient.send('/app/login' , {}, username + ',' + password);
-  }
-
 }

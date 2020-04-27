@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService} from '../util/messageService';
 import $ from 'jquery';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import $ from 'jquery';
 export class LoginComponent implements OnInit {
 
   messageService = MessageService;
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
   }
