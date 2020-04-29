@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<div (keyup.f1)="commandLineVisible = !commandLineVisible">
+  <input *ngIf="commandLineVisible" class="ui input" id="commandInput" type="text" (keydown.enter)="sendCommand(commandInput.value)" #commandInput/>
+  <router-outlet></router-outlet>
+</div>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MessageService} from './util/messageService';
 import {Router} from '@angular/router';
+import $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit{
   public title = 'ChatExample';
+  public commandLineVisible = false;
 
   constructor(private router: Router){
   }
@@ -18,5 +20,10 @@ export class AppComponent implements OnInit{
     MessageService.loggedIn$.subscribe(x => this.router.navigate(['/chat']));
     MessageService.loggedOut$.subscribe(x => this.router.navigate(['/login']));
     MessageService.connect();
+  }
+
+  sendCommand(command) {
+    MessageService.sendCommand(command);
+    $('#commandInput').val('');
   }
 }

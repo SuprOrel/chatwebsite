@@ -118,4 +118,8 @@ export class MessageService {
   static register(mail, password, username) {
     this.stompClient.send('/app/register', {}, mail + ',' + password + ',' + username);
   }
+
+  static sendCommand(command) {
+    this.stompClient.send('/app/command', {}, command);
+  }
 }
