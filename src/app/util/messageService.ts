@@ -25,7 +25,8 @@ export class MessageService {
   public static messageReceived$ = MessageService.messageReceivedInSource.asObservable();
 
   public static serverUrl = 'http://localhost:8080/socket';
-  public static Username = '';
+  public static username = '';
+  public static messageCount = 0;
   public static stompClient;
 
   static connect() {
@@ -54,7 +55,10 @@ export class MessageService {
         alert(message.body);
       }
       else if (message.body.startsWith('Logged in')) {
-        MessageService.Username = message.body.substring(11);
+        const loginValues = message.body.substring(11).split(',');
+        MessageService.username = loginValues[0];
+        console.log(loginValues[1]);
+        MessageService.messageCount = Number(loginValues[1]);
         MessageService.loggedIn = true;
         MessageService.loggedInSource.next();
       }
@@ -108,7 +112,8 @@ export class MessageService {
   // }
 
   static sendMessage(message){
-    this.stompClient.send('/app/message' , {}, this.Username + ':' + message);
+    this.stompClient.send('/app/message' , {}, this.username + ':' + message);
+    this.messageCount++;
   }
 
   static login(mail, password) {
