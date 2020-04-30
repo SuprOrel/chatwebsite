@@ -116,6 +116,9 @@ export class MessageService {
     this.messageCount++;
   }
 
+  static loginAsGuest() {
+    this.login('Empty', 'abc123');
+  }
   static login(mail, password) {
     this.stompClient.send('/app/login' , {}, mail + ',' + password);
   }
