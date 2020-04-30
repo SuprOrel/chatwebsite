@@ -1,0 +1,22 @@
+<div class="ui grid">
+  <div class="twelve wide column">
+    <div class="row" >
+      <button class="ui tiny button" (click)="router.navigate(['/chat'])">Back</button>
+    </div>
+    <div class="row">
+      <input class="ui input" id="passwordInput" type="text" placeholder="Password" #passwordInput/>
+    </div>
+    <div class="row">
+      <input class="ui input" id="newPasswordInput" type="text" placeholder="New password" #newPasswordInput/>
+    </div>
+    <div class="row">
+      <input class="ui input" id="newUsernameInput" type="text" placeholder="New username" #newUsernameInput/>
+    </div>
+    <div class="row">
+      <button class="ui tiny button" (click)="messageService.editUser(passwordInput.value, newPasswordInput.value, newUsernameInput.value)">Edit</button>
+    </div>
+  </div>
+  <div class="column">
+    <app-userlist [usernames]="messageService.usernames" ></app-userlist>
+  </div>
+</div>

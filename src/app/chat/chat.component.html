@@ -1,5 +1,7 @@
 <div class="ui grid">
   <div class="row">
+    <button *ngIf="messageService.username != 'Guest'; else elseBlock" class="ui tiny button" (click)="router.navigate(['/options'])">Options</button>
+    <ng-template #elseBlock><button class="ui tiny button" >Options</button></ng-template>
     <span>Message count: {{messageService.messageCount}}</span>
   </div>
   <div class="twelve wide column">

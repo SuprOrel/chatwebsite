@@ -1,13 +1,13 @@
 <div class="ui grid" >
   <div class="twelve wide column">
     <div class="row">
-      <input class="ui input" id="usernameInput" type="text" (keydown.enter)="login(usernameInput.value, passwordInput.value)" #usernameInput/>
+      <input class="ui input" id="emailInput" type="text" placeholder="Email" #emailInput/>
     </div>
     <div class="row">
-      <input class="ui input" id="passwordInput" type="text" (keydown.enter)="login(usernameInput.value, passwordInput.value)" #passwordInput/>
+      <input class="ui input" id="passwordInput" type="text" (keydown.enter)="login(emailInput.value, passwordInput.value)" placeholder="Password" #passwordInput/>
     </div>
     <div class="row">
-      <button class="ui tiny button" (click)="login(usernameInput.value, passwordInput.value)">Login</button>
+      <button class="ui tiny button" (click)="login(emailInput.value, passwordInput.value)">Login</button>
     </div>
     <div class="row">
       <button class="ui tiny button" (click)="router.navigate(['/register'])">Register</button>

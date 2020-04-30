@@ -26,6 +26,7 @@ export class MessageService {
 
   public static serverUrl = 'http://localhost:8080/socket';
   public static username = '';
+  public static email = '';
   public static messageCount = 0;
   public static stompClient;
 
@@ -46,12 +47,21 @@ export class MessageService {
         else if (msg.message.startsWith('registerd')) {
           MessageService.usernames.push(msg.message.substring(10));
         }
+        else if (msg.message.startsWith('edited')) {
+          const values = msg.message.substring(7);
+          const index = values.indexOf(' ');
+          const name = values.substring(0, index);
+          const newname = values.substring(index + 4);
+          console.log(name + ' edited to ' + newname);
+          MessageService.usernames.splice(MessageService.usernames.indexOf(name), 1);
+          MessageService.usernames.push(newname);
+        }
       }
       MessageService.messages.push(msg);
       MessageService.messageReceivedInSource.next();
     }
     function replyRecieved(message) {
-      if (message.body.startsWith('Login failed') || message.body.startsWith('Register failed')) {
+      if (message.body.startsWith('Login failed') || message.body.startsWith('Register failed') || message.body.startsWith('Edit failed')) {
         alert(message.body);
       }
       else if (message.body.startsWith('Logged in')) {
@@ -116,10 +126,14 @@ export class MessageService {
     this.messageCount++;
   }
 
+  static editUser(password, newpassword, newusername) {
+    this.stompClient.send('/app/edit' , {}, this.email + ',' + password + ',' + newpassword + ',' + newusername);
+  }
   static loginAsGuest() {
     this.login('Empty', 'abc123');
   }
   static login(mail, password) {
+    this.email = mail;
     this.stompClient.send('/app/login' , {}, mail + ',' + password);
   }
 

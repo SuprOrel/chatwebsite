@@ -15,7 +15,7 @@ export class ChatComponent implements OnInit {
   public messageService = MessageService;
   // public usernames: string[] = ['oof'];
   // public messages: string[] = ['07:08:50- HAHA:sd'];
-  constructor(){
+  constructor(public router: Router){
     // const comp = new UserComponent();
     // comp.username = 'oof';
     // this.usernames.push(comp);
