@@ -17,4 +17,9 @@ export class ChatMessageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  formatNumber(value: number): string {
+    const asstring = value.toString();
+    if (asstring.length < 2) { return '0' + asstring; }
+    return asstring;
+  }
 }

@@ -15,6 +15,10 @@
     <div class="row">
       <button class="ui tiny button" (click)="messageService.editUser(passwordInput.value, newPasswordInput.value, newUsernameInput.value)">Edit</button>
     </div>
+    <div class="row">
+      Message count: {{messageService.messageCount}} <br />
+      Premium expiration date: {{messageService.premiumDate}}
+    </div>
   </div>
   <div class="column">
     <app-userlist [usernames]="messageService.usernames" ></app-userlist>

@@ -1,5 +1,5 @@
 <div class="ui grid">
-  <div class="column" style="color: dimgrey;">{{chatMessage.date}}</div>
+  <div class="column" style="color: dimgrey;">{{formatNumber(chatMessage.date.getHours()) + ':' + formatNumber(chatMessage.date.getMinutes())}}</div>
   <app-user class="three wide column" [username]="chatMessage.sender"></app-user>
   <div class="four wide column" style="color: dimgrey">
     <span *ngFor="let word of chatMessage.message.split(' ')">

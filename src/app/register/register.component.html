@@ -1,16 +1,16 @@
 <div class="ui grid" >
   <div class="twelve wide column">
     <div class="row">
-      <input class="ui input" id="mailInput" type="text" #mailInput/>
+      <input class="ui input" id="mailInput" type="text" placeholder="Email" #mailInput/>
     </div>
     <div class="row">
-      <input class="ui input" id="passwordInput" type="text" #passwordInput/>
+      <input class="ui input" id="passwordInput" type="text" placeholder="Password" #passwordInput/>
     </div>
     <div class="row">
-      <input class="ui input" id="rePasswordInput" type="text" #rePasswordInput/>
+      <input class="ui input" id="rePasswordInput" type="text" placeholder="Confirm password" #rePasswordInput/>
     </div>
     <div class="row">
-      <input class="ui input" id="usernameInput" type="text" #usernameInput/>
+      <input class="ui input" id="usernameInput" type="text" placeholder="Username" #usernameInput/>
     </div>
     <div class="row">
       <button class="ui tiny button" (click)="register(mailInput.value, passwordInput.value, rePasswordInput.value, usernameInput.value)">Register</button>

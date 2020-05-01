@@ -4,6 +4,7 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import $ from 'jquery';
 import {ChatMessage} from './chatMessage';
+import {formatDate} from '@angular/common';
 
 
 export class MessageService {
@@ -27,6 +28,7 @@ export class MessageService {
   public static serverUrl = 'http://localhost:8080/socket';
   public static username = '';
   public static email = '';
+  public static premiumDate = new Date();
   public static messageCount = 0;
   public static stompClient;
 
@@ -69,6 +71,7 @@ export class MessageService {
         MessageService.username = loginValues[0];
         console.log(loginValues[1]);
         MessageService.messageCount = Number(loginValues[1]);
+        MessageService.premiumDate = ChatMessage.formatDate(loginValues[2]);
         MessageService.loggedIn = true;
         MessageService.loggedInSource.next();
       }

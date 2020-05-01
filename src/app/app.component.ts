@@ -20,6 +20,7 @@ export class AppComponent implements OnInit{
     MessageService.loggedIn$.subscribe(x => this.router.navigate(['/chat']));
     MessageService.loggedOut$.subscribe(x => this.router.navigate(['/login']));
     MessageService.connect();
+    console.log();
   }
 
   sendCommand(command) {
